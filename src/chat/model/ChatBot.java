@@ -22,14 +22,25 @@ public class ChatBot
 	public ChatBot(String userName)
 	{
 		this.memesList = new ArrayList<String>();
-		
+		this.politicalTopicList = new ArrayList<String>();
 		this.userName = userName;
 		this.content = "Motivational Sign!";
 	}
 	
 	private void buildMemesList()
 	{
+		this.memesList.add("cute animals");
+		this.memesList.add("doge");
+		this.memesList.add("aliens");
+		this.memesList.add("spoderman");
+		this.memesList.add("me gusta");
+		this.memesList.add("troll");
+		this.memesList.add("bad luck brain");
+		this.memesList.add("unhelpful high school teacher");
+		this.memesList.add("what if I told you");
 		
+		buildMemesList();
+		buildPoliticalTopicsList();
 	}
 	
 	private void buildPoliticalTopicsList()
@@ -84,7 +95,6 @@ public class ChatBot
 		return false;
 	}
 	
-	
 	/**
 	 * Checks to see that the supplied String value is in the current memesList variable.
 	 * @param currentInput The supplied String to be checked.
@@ -92,7 +102,69 @@ public class ChatBot
 	 */
 	public boolean memeChecker(String currentInput)
 	{
-		return false;
+		boolean hasMeme = false;
+		
+		for(String meme : memesList)
+		{
+			if(currentInput.toLowerCase().contains(meme.toLowerCase()))
+			{
+				hasMeme = true;
+			}
+		}
+		
+		return hasMeme;
+	}
+	
+	public String processConversation(String currentInput)
+	{
+		String nextConversation = "oh what else would you like to talk about?";
+		int randomTopic = (int) (Math.random() *5); //generates a random number from 1 to 4
+		
+		switch (randomTopic)
+		{
+			case 0:
+				if(memeChecker(currentInput))
+				{
+					nextConversation = "That is a very popular meme this year. What else are you wanting to talk about?";
+				}
+				break;
+			case 1:
+				if(politicalTopicChecker(currentInput))
+				{
+					nextConversation = "blue pickles";
+				}
+				break;
+			case 2:
+				if(contentChecker(currentInput))
+				{
+					nextConversation = "fireball";
+				}
+				break;
+			case 3:
+				if(currentInput.length() > 20)
+				{
+					nextConversation = "cheese";
+				}
+				break;
+			case 4:
+				nextConversation = "Yes, I do like it. What else?";
+				break;
+			default:
+				break;
+		}
+		
+		return nextConversation;
+	}
+	
+	public boolean quitChecker(String currentInput)
+	{
+		boolean okToQuit = false;
+		
+		if(currentInput.equalsIgnoreCase("quit"))
+		{
+			okToQuit = true;
+		}
+		return okToQuit;
 	}
 	
 	/**
@@ -101,7 +173,7 @@ public class ChatBot
 	 */
 	public String getUserName()
 	{
-		return null;
+		return userName;
 	}
 	
 	/**
@@ -110,7 +182,7 @@ public class ChatBot
 	 */
 	public String getContent()
 	{
-		return null;
+		return content;
 	}
 	
 	/**
@@ -119,7 +191,7 @@ public class ChatBot
 	 */
 	public ArrayList<String> getMemesList()
 	{
-		return null;
+		return memesList;
 	}
 	
 	/**
@@ -128,7 +200,7 @@ public class ChatBot
 	 */
 	public ArrayList<String> getPoliticalTopicList()
 	{
-		return null;
+		return politicalTopicList;
 	}
 	
 	/**
