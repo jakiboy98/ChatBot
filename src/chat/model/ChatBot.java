@@ -8,7 +8,7 @@ import java.util.ArrayList;
  * @author Jacob Willson
  * @version 1.1 10/23/15 Completed the lengthChecker method. Fixed the Constructor and getter for userName.
  */
-public class ChatBot
+public class Chatbot
 {
 	private ArrayList<String> memesList;
 	private ArrayList<String> politicalTopicList;
@@ -19,7 +19,7 @@ public class ChatBot
 	 * Creates an instance of the Chatbot with the supplied username.
 	 * @param userName The username for the chatbot.
 	 */
-	public ChatBot(String userName)
+	public Chatbot(String userName)
 	{
 		this.memesList = new ArrayList<String>();
 		this.politicalTopicList = new ArrayList<String>();
@@ -45,7 +45,33 @@ public class ChatBot
 	
 	private void buildPoliticalTopicsList()
 	{
-		
+		this.politicalTopicList.add("election");
+
+		this.politicalTopicList.add("Democrat");
+
+		this.politicalTopicList.add("Republican");
+
+		this.politicalTopicList.add("liberal");
+
+		this.politicalTopicList.add("conservative");
+
+		this.politicalTopicList.add("Trump");
+
+		this.politicalTopicList.add("Clinton");
+
+		this.politicalTopicList.add("Biden");
+
+		this.politicalTopicList.add("Carson");
+
+		this.politicalTopicList.add("Rubio");
+
+		this.politicalTopicList.add("Fiorina");
+
+		this.politicalTopicList.add("Sanders");
+
+		this.politicalTopicList.add("vote");
+
+		this.politicalTopicList.add("11/4/16");
 	}
 	
 	/**
@@ -57,14 +83,6 @@ public class ChatBot
 	public boolean lengthChecker(String currentInput)
 	{
 		boolean hasLength = false;
-		
-		if(currentInput != null);
-		{
-			if(currentInput.length() >= 1)
-			{
-				hasLength = true;
-			}
-		}
 		
 		if(currentInput != null && currentInput.length() > 0)
 		{
@@ -82,6 +100,17 @@ public class ChatBot
 	public boolean contentChecker(String currentInput)
 	{
 		return false;
+	}
+	
+	public boolean keyboardMashChecker(String currentInput)
+	{
+		boolean hasMash = false;
+		if (currentInput.toLowerCase().contains("sdf") || currentInput.toLowerCase().contains("dfg") || currentInput.toLowerCase().contains("cvb") || currentInput.toLowerCase().contains(",./"))
+		{
+			hasMash = true;
+		}
+		
+		return hasMash;
 	}
 	
 	/**
@@ -209,6 +238,6 @@ public class ChatBot
 	 */
 	public void setContent(String content)
 	{
-		
+		this.content = content;
 	}
 }

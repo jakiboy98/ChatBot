@@ -1,30 +1,33 @@
 package chat.controller;
 
-import chat.model.ChatBot;
+import chat.model.Chatbot;
 import chat.view.ChatView;
-
+import chat.view.ChatFrame;
+//Method Documentation
 /**
  * Application controller for the ChatBot project.
  * 
  * @author Jacob Willson
  * @version 1.1 10/23/15
  */
-public class ChatController
+public class ChatController //Class
 {
 
 	private ChatView display;
-	private ChatBot myBot;
+	private Chatbot myBot; //Data Member
+	private ChatFrame baseFrame;
 
-	public ChatController()
+	public ChatController() //Controller
 	{
 		display = new ChatView();
 		String userName = display.grabInput("What is your name?");
-		myBot = new ChatBot(userName);
+		baseFrame = new ChatFrame(this);
+		myBot = new Chatbot(userName);
 	}
 
-	public void start()
+	public void start() 
 	{
-		display.myDisplayText("Hello " + myBot.getUserName());
+		display.displayText("Hello " + myBot.getUserName());
 		chat();
 
 	}
@@ -38,9 +41,40 @@ public class ChatController
 			conversation = display.grabInput(conversation);
 		}
 	}
+	
+	public String userToChatbot(String conversation)
+	{
+		String response = "";
+		
+		if(myBot.quitChecker(conversation))
+		{
+			ShutDown();
+		}
+		
+		response = myBot.processConversation(conversation);
+		
+		return response;
+	}
 
 	private void ShutDown()
 	{
-			display.displayText("Goodbye" + myBot.getUserName);
+			display.displayText("Goodbye" + myBot.getUserName() + " it has been my pleasure to talk with you");
 	}
+	
+	public Chatbot getChatbot()
+	{
+		return myBot;
+	}
+	
+	public ChatFrame getBaseFrame()
+	{
+		return baseFrame;
+	}
+	
+	public ChatView getChatView()
+	{
+		return display;
+	}
+	
+	
 }
