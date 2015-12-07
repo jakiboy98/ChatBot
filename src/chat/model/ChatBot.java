@@ -25,52 +25,65 @@ public class Chatbot
 		this.politicalTopicList = new ArrayList<String>();
 		this.userName = userName;
 		this.content = "Motivational Sign!";
-	}
-	
-	private void buildMemesList()
-	{
-		this.memesList.add("cute animals");
-		this.memesList.add("doge");
-		this.memesList.add("aliens");
-		this.memesList.add("spoderman");
-		this.memesList.add("me gusta");
-		this.memesList.add("troll");
-		this.memesList.add("bad luck brain");
-		this.memesList.add("unhelpful high school teacher");
-		this.memesList.add("what if I told you");
 		
 		buildMemesList();
 		buildPoliticalTopicsList();
 	}
 	
+	private void buildMemesList()
+	{
+		this.memesList.add("Me Gusta");
+
+		this.memesList.add("Troll");
+
+		this.memesList.add("\"Aliens\"");
+
+		this.memesList.add("doge");
+
+		this.memesList.add("Bad Luck Brian");
+
+		this.memesList.add("Unhelpful Highschool Teacher");
+
+		this.memesList.add("Cute Animals");
+
+		this.memesList.add("Spoderman");
+
+		this.memesList.add("Rare Pepe");
+
+		this.memesList.add("What if I told you...");
+
+		this.memesList.add("cute animals");
+
+	}
+	
 	private void buildPoliticalTopicsList()
 	{
 		this.politicalTopicList.add("election");
-
+		
 		this.politicalTopicList.add("Democrat");
-
+		
 		this.politicalTopicList.add("Republican");
-
+		
 		this.politicalTopicList.add("liberal");
-
+		
 		this.politicalTopicList.add("conservative");
-
+		
 		this.politicalTopicList.add("Trump");
-
+		
 		this.politicalTopicList.add("Clinton");
-
+		
 		this.politicalTopicList.add("Biden");
-
+		
 		this.politicalTopicList.add("Carson");
-
+		
 		this.politicalTopicList.add("Rubio");
-
+		
 		this.politicalTopicList.add("Fiorina");
-
+		
 		this.politicalTopicList.add("Sanders");
-
+		
 		this.politicalTopicList.add("vote");
-
+		
 		this.politicalTopicList.add("11/4/16");
 	}
 	
@@ -99,7 +112,13 @@ public class Chatbot
 	 */
 	public boolean contentChecker(String currentInput)
 	{
-		return false;
+		boolean hasContent = false;
+		if (currentInput != null && currentInput.length() > 0)
+		{
+			hasContent = true;
+		}
+		
+		return hasContent;
 	}
 	
 	public boolean keyboardMashChecker(String currentInput)
