@@ -56,7 +56,7 @@ public class Chatbot
 
 	}
 	
-	private void buildPoliticalTopicsList()
+	private void buildPoliticalTopicList()
 	{
 		this.politicalTopicList.add("election");
 		
