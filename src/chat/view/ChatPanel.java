@@ -14,25 +14,58 @@ public class ChatPanel extends JPanel //Gui Class, and Chatbot Class
 {
 	private ChatController baseController;
 	private JButton submitButton;
+	private JButton testButton;
 	private JTextField firstTextField;
 	private SpringLayout baseLayout;
 	private JTextField typingField;
 	private JLabel promptLabel;
 	private JTextArea chatArea;
+	private JScrollPane textPane;
+	private JButton tweetButton;
+	private JButton saveButton;
+	private JButton loadButton;
 	
 	public ChatPanel(ChatController baseController)
 	{
-		this.baseController = baseController;
+		//chatArea = new JTextArea(10, 25);
+		//typingField = new JTextField(25);
+		
+		//testButton =new JButton("Chat");
+		
+		//this.baseController = baseController;
+		
+		//baseLayout = new SpringLayout();
+		//submitButton = new JButton("Please do not click the button"); //New Data Member
+		//firstTextField = new JTextField("Words can be typed here");
+		//chatArea = new JTextArea();
+		//promptLabel = new JLabel();
+		//typingField = new JTextField();
+		//setupChatPane();
+		//setupPanel();
+		//setupLayout();
+		//setupListeners();
 		
 		baseLayout = new SpringLayout();
-		submitButton = new JButton("Please do not click the button"); //New Data Member
-		firstTextField = new JTextField("Words can be typed here");
-		chatArea = new JTextArea();
-		promptLabel = new JLabel();
-		typingField = new JTextField();
+		chatArea = new JTextArea(10,25);
+		typingField = new JTextField(25);
+		testButton = new JButton("chat");
+		
+		setupChatPane();
 		setupPanel();
 		setupLayout();
 		setupListeners();
+	}
+	
+	private void setupChatPane()
+	{
+		textPane = new JScrollPane(chatArea);
+		chatArea.setLineWrap(true);
+		chatArea.setWrapStyleWord(true);
+		chatArea.setEnabled(false);
+		chatArea.setBackground(Color.ORANGE);
+		chatArea.setEditable(false);
+		textPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
+		textPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 	}
 	
 	private void setupLayout()

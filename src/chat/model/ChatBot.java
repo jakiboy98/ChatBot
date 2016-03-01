@@ -27,7 +27,7 @@ public class Chatbot
 		this.content = "Motivational Sign!";
 		
 		buildMemesList();
-		buildPoliticalTopicsList();
+		buildPoliticalTopicList();
 	}
 	
 	private void buildMemesList()

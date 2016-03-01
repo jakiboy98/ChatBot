@@ -21,7 +21,6 @@ public class ChatController //Class
 	{
 		display = new ChatView();
 		String userName = display.grabInput("What is your name?");
-		baseFrame = new ChatFrame(this);
 		myBot = new Chatbot(userName);
 	}
 
@@ -59,6 +58,7 @@ public class ChatController //Class
 	private void ShutDown()
 	{
 			display.displayText("Goodbye" + myBot.getUserName() + " it has been my pleasure to talk with you");
+			System.exit(0);
 	}
 	
 	public Chatbot getChatbot()
