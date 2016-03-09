@@ -173,25 +173,25 @@ public class Chatbot
 			case 0:
 				if(memeChecker(currentInput))
 				{
-					nextConversation = "That is a very popular meme this year. What else are you wanting to talk about?";
+					nextConversation = "That is a very popular meme this year. What else do you want to talk about?";
 				}
 				break;
 			case 1:
 				if(politicalTopicChecker(currentInput))
 				{
-					nextConversation = "blue pickles";
+					nextConversation = "Would you like to talk about blue pickles?";
 				}
 				break;
 			case 2:
 				if(contentChecker(currentInput))
 				{
-					nextConversation = "fireball";
+					nextConversation = "Why don't we talk about fireballs";
 				}
 				break;
 			case 3:
 				if(currentInput.length() > 20)
 				{
-					nextConversation = "cheese";
+					nextConversation = "Would you like to talk aobut Cheese?";
 				}
 				break;
 			case 4:

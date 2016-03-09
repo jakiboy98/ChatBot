@@ -1,5 +1,6 @@
 package chat.controller;
 
+import chat.model.CTECTwitter;
 import chat.model.Chatbot;
 import chat.view.ChatView;
 import chat.view.ChatFrame;
@@ -16,12 +17,15 @@ public class ChatController //Class
 	private ChatView display;
 	private Chatbot myBot; //Data Member
 	private ChatFrame baseFrame;
+	private CTECTwitter myTwitter;
 
 	public ChatController() //Controller
 	{
+		myTwitter = new CTECTwitter(this);
 		display = new ChatView();
 		String userName = display.grabInput("What is your name?");
 		myBot = new Chatbot(userName);
+		baseFrame = new ChatFrame(this);
 	}
 
 	public void start() 
@@ -33,12 +37,12 @@ public class ChatController //Class
 
 	private void chat()
 	{
-		String conversation = display.grabInput("what would you like to talk about today?");
-		while(myBot.lengthChecker(conversation))
-		{
-			conversation = myBot.processConversation(conversation);
-			conversation = display.grabInput(conversation);
-		}
+//		String conversation = display.grabInput("what would you like to talk about today?");
+//		while(myBot.lengthChecker(conversation))
+//		{
+//			conversation = myBot.processConversation(conversation);
+//			conversation = display.grabInput(conversation);
+//		}
 	}
 	
 	public String userToChatbot(String conversation)
@@ -59,6 +63,17 @@ public class ChatController //Class
 	{
 			display.displayText("Goodbye" + myBot.getUserName() + " it has been my pleasure to talk with you");
 			System.exit(0);
+	}
+	
+	public void sendTweet(String tweet)
+	{
+		myTwitter.sendTweet(tweet);
+	}
+	
+	
+	public void handleErrors(String error)
+	{
+		display.displayText(error);
 	}
 	
 	public Chatbot getChatbot()
