@@ -32,4 +32,61 @@ public class CTECTwitter
 			baseController.handleErrors(error.getErrorMessage());
 		}
 	}
+	
+	public String topResults(List<String> wordList)
+	{
+		
+	}
+	
+	public void loadTweets(String twitterHandle) throws TwitterException
+	{
+		Paging statusPage = new Paging(1, 200);
+		int page = 1;
+		while (page <= 10)
+		{
+			statusPage.setPage(page);
+			statuses.addAll(chatbotTwitter.getUserTimeline(twitterHandle, statusPage));
+			page++;
+		}
+		for (Status curreStatus : statuses)
+		{
+			String[] tweetTex = currentStatus.getText().split(" ");
+			for (String word : tweetText)
+			{
+				tweetTexts.add(removePunctuation(word).toLowerCase());
+			}
+		}
+		removeCommonEnglishWords(tweetTexts);
+		removeEmptyText();
+	}
+	
+	private void removeEmptyText()
+	{
+		
+	}
+	
+	private List removeCommonEnglishWords(List<String> wordList)
+	{
+		
+	}
+	
+	private String[] importWordsToArray()
+	{
+		
+	}
+	
+	private void removeTwitterUsernamesFromList(List<String> wordList)
+	{
+		
+	}
+	
+	private String removePunctuation(String currentString)
+	{
+		
+	}
+	
+	public String sampleInvestigation()
+	{
+		
+	}
 }
