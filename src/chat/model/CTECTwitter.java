@@ -1,7 +1,12 @@
 package chat.model;
 
 import twitter4j.*;
+
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
 import chat.controller.ChatController;
 
 public class CTECTwitter
@@ -35,7 +40,7 @@ public class CTECTwitter
 	
 	public String topResults(List<String> wordList)
 	{
-		
+		return null;
 	}
 	
 	public void loadTweets(String twitterHandle) throws TwitterException
@@ -45,18 +50,14 @@ public class CTECTwitter
 		while (page <= 10)
 		{
 			statusPage.setPage(page);
-			statuses.addAll(chatbotTwitter.getUserTimeline(twitterHandle, statusPage));
+			statusList.addAll(chatbotTwitter.getUserTimeline(twitterHandle, statusPage));
 			page++;
 		}
-		for (Status curreStatus : statuses)
+		for (Status currentStatus : statusList)
 		{
-			String[] tweetTex = currentStatus.getText().split(" ");
-			for (String word : tweetText)
-			{
-				tweetTexts.add(removePunctuation(word).toLowerCase());
-			}
+			String[] tweetText = currentStatus.getText().split(" ");
 		}
-		removeCommonEnglishWords(tweetTexts);
+		removeCommonEnglishWords(wordsList);
 		removeEmptyText();
 	}
 	
@@ -67,12 +68,53 @@ public class CTECTwitter
 	
 	private List removeCommonEnglishWords(List<String> wordList)
 	{
+		String[] boringWords = importWordsToArray();
 		
+		for (int count = 0; count < wordList.size(); count++)
+		{
+			for (int removeSpot = 0; removeSpot < boringWords.length; removeSpot++)
+			{
+				if (wordList.get(count).equalsIgnoreCase(boringWords[removeSpot]))
+				{
+					wordList.remove(count);
+					count--;
+					removeSpot = boringWords.length;
+				}
+			}
+		}
+		//Comment this if you want to keep Twitter usernames in your word list.
+		removeTwitterUsernamesFromList(wordList);
+		
+		return wordList;
 	}
 	
 	private String[] importWordsToArray()
 	{
-		
+		String[] boringWords;
+		int wordCount = 0;
+		try
+		{
+			Scanner wordFile = new Scanner(new File("commonWords.txt"));
+			while (wordFile.hasNext())
+			{
+				wordCount++;
+				wordFile.next();
+			}
+			wordFile.reset();
+			boringWords = new String[wordCount];
+			int boringWordCount = 0;
+			while (wordFile.hasNext())
+			{
+				boringWords[boringWordCount] = wordFile.next();
+				boringWordCount++;
+			}
+			wordFile.close();
+		}
+		catch (FileNotFoundException e)
+		{
+			return new String[0];
+		}
+		return boringWords;
 	}
 	
 	private void removeTwitterUsernamesFromList(List<String> wordList)
@@ -82,7 +124,17 @@ public class CTECTwitter
 	
 	private String removePunctuation(String currentString)
 	{
+		String punctuation = ".,'?!:;\"(){}^[]<>-"; //thing about adding # and @
 		
+		String scrubbedString = "";
+		for (int i= 0; i < currentString.length(); i++)
+		{
+			if (punctuation.indexOf(currentString.charAt(i)) == -1)
+			{
+				scrubbedString += currentString.charAt(i);
+			}
+		}
+		return scrubbedString;
 	}
 	
 	public String sampleInvestigation()
