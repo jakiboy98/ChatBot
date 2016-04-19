@@ -24,6 +24,7 @@ public class ChatPanel extends JPanel //Gui Class, and Chatbot Class
 	private JButton tweetButton;
 	private JButton saveButton;
 	private JButton loadButton;
+	private JButton analyzeTwitterButton;
 	
 	public ChatPanel(ChatController baseController)
 	{
@@ -52,6 +53,9 @@ public class ChatPanel extends JPanel //Gui Class, and Chatbot Class
 		tweetButton = new JButton("tweet");
 		saveButton = new JButton("save");
 		loadButton = new JButton("load");
+		analyzeTwitterButton = new JButton("analyze");
+		baseLayout.putConstraint(SpringLayout.WEST, analyzeTwitterButton, 10, SpringLayout.WEST, this);
+		baseLayout.putConstraint(SpringLayout.SOUTH, analyzeTwitterButton, -6, SpringLayout.NORTH, typingField);
 		firstTextField = new JTextField(20);
 		submitButton = new JButton("submit");
 		this.baseController = baseController;
@@ -108,6 +112,7 @@ public class ChatPanel extends JPanel //Gui Class, and Chatbot Class
 			this.add(textPane);
 			this.add(testButton);
 			this.add(submitButton);
+			this.add(analyzeTwitterButton);
 			//this.add(promptLabel);
 			typingField.setToolTipText("Type here for the chatbot");
 			chatArea.setEnabled(false);
@@ -140,10 +145,41 @@ public class ChatPanel extends JPanel //Gui Class, and Chatbot Class
 					baseController.sendTweet("notes");
 				}
 			});
+		
+		analyzeTwitterButton.addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent click)
+			{
+				baseController.sendTweet("no text to send");
+			}
+		});
+		
+		saveButton.addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent click)
+			{
+				String file = IOController.saveFile(chatArea.getText());
+				promptLabel.setText(file);
+			}
+		});
+		
+		loadButton.addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent click)
+			{
+				String loadedText + IOController.readTextFromFile(promptLabel.getText());
+				chatArea.setText(loadedText);
+			}
+		});
 	}
 	
 	public JTextField getTextField()
 	{
 		return typingField;
+	}
+	
+	public JButton getButton()
+	{
+		return testButton;
 	}
 }
