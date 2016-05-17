@@ -179,4 +179,25 @@ public class CTECTwitter
 		
 		return results;
 	}
+	
+	public String searchSandy()
+	{
+		 // The factory instance is re-useable and thread safe.
+	    Twitter twitter = TwitterFactory.getSingleton();
+	    Query query = new Query("source:twitter4j Sandy Utah");
+	    QueryResult result = null;
+		try
+		{
+			result = twitter.search(query);
+		}
+		catch (TwitterException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	    for (Status status : result.getTweets()) {
+	        System.out.println("@" + status.getUser().getScreenName() + ":" + status.getText());
+	    }
+		return String;
+	}
 }
